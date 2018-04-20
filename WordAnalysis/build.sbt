@@ -17,7 +17,7 @@ lazy val library =
   new {
 
     object Version {
-      val dl4j = "0.9.1"
+      val dl4j = "1.0.0-alpha"
       val dl4jNlp = "1.0.0-alpha"
       val scalaTest = "3.0.4"
     }

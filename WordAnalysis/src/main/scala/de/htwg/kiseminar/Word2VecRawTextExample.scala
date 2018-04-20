@@ -1,6 +1,6 @@
 package de.htwg.textanalysis
 
-import java.io.InputStream
+import java.io.{File, FileInputStream}
 import java.util
 
 import org.deeplearning4j.models.word2vec.Word2Vec
@@ -13,12 +13,11 @@ object Word2VecRawTextExample {
 
   def main(args: Array[String]): Unit = {
 
-    val stream: InputStream = getClass.getResourceAsStream("/raw_sentences.txt")
+    val fileInputStream = new FileInputStream(new File("src/main/resources/raw_sentences.txt"))
 
-    val iter = new BasicLineIterator(stream)
+    val iter = new BasicLineIterator(fileInputStream)
     // Split on white spaces in the line to get words
     val t = new DefaultTokenizerFactory
-
     /*
         CommonPreprocessor will apply the following regex to each token: [\d\.:,"'\(\)\[\]|/?!;]+
         So, effectively all numbers, punctuation symbols and some special symbols are stripped off.
@@ -37,10 +36,10 @@ object Word2VecRawTextExample {
       .build
 
     vec.fit()
-    // Prints out the closest 10 words to "day". An example on what to do with these Word Vectors.
 
-    val lst: util.Collection[String] = vec.wordsNearestSum("mann", 10)
-    println("10 Words closest to 'mann': {}", lst)
+    val word = "day"
+    val lst: util.Collection[String] = vec.wordsNearestSum(word, 10)
+    println(s"10 Words closest to '$word': $lst")
 
   }
 }
