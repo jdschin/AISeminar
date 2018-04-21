@@ -13,7 +13,7 @@ object Word2VecRawTextExample {
 
   def main(args: Array[String]): Unit = {
 
-    val fileInputStream = new FileInputStream(new File("src/main/resources/raw_sentences.txt"))
+    val fileInputStream = new FileInputStream(new File("src/main/resources/Der_Dunkelgraf_Norm.txt"))
 
     val iter = new BasicLineIterator(fileInputStream)
     // Split on white spaces in the line to get words
@@ -37,7 +37,7 @@ object Word2VecRawTextExample {
 
     vec.fit()
 
-    val word = "day"
+    val word = "graf"
     val lst: util.Collection[String] = vec.wordsNearestSum(word, 10)
     println(s"10 Words closest to '$word': $lst")
 
