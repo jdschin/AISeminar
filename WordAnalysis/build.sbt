@@ -9,7 +9,8 @@ libraryDependencies ++= Seq(
   library.dl4j,
   library.nd4jNativePlatform,
   library.scalNet,
-  library.dl4jNlp
+  library.dl4jNlp,
+  library.scalaTest
 )
 
 
