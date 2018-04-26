@@ -8,6 +8,8 @@ import org.deeplearning4j.text.tokenization.tokenizer.preprocessor.CommonPreproc
 import org.deeplearning4j.text.tokenization.tokenizerfactory.DefaultTokenizerFactory
 import org.scalatest.{FlatSpec, Matchers}
 
+import scala.collection.JavaConverters._
+
 class VocabularyTest extends FlatSpec with Matchers {
   private val sampleTextPath = "src/test/resources/sample_text.txt"
 
@@ -28,6 +30,9 @@ class VocabularyTest extends FlatSpec with Matchers {
     val vocab = vec.getVocab
 
     vocab.wordFrequency("ein") should be (2)
+    vocab.wordFrequency("hund") should be (1)
+    vocab.wordFrequency("ist") should be (1)
+    vocab.wordFrequency("tier") should be (1)
   }
 
   it should "not contains numbers and punctuation marks" in {
@@ -35,10 +40,7 @@ class VocabularyTest extends FlatSpec with Matchers {
     vec.buildVocab()
     val vocab = vec.getVocab
 
-    vocab.containsWord(".") should be (false)
-    vocab.containsWord(",") should be (false)
-    vocab.containsWord(")") should be (false)
-    vocab.containsWord("1") should be (false)
+    vocab.tokens().asScala.foreach(_.getWord.matches("[a-z]+") should be (true))
   }
 
   def createWord2VecConfiguration(): Word2Vec = {
