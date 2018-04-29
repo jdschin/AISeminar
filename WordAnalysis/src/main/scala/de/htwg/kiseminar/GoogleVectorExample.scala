@@ -3,7 +3,7 @@ package de.htwg.kiseminar
 
 object GoogleVectorExample {
 
-  val modelPath = "./GoogleNews-vectors-negative300.bin"
+  val modelPath = "src/main/resources/GoogleNews-vectors-negative300.bin"
 
   def main(args: Array[String]): Unit = {
 
@@ -24,7 +24,7 @@ object GoogleVectorExample {
       val command = readLine()
       continue = isQuit(command)
       if (continue) {
-        val results = googleModel.calculateTerm(command.trim)
+        val results = googleModel.calculateTerm(command.replace(" ", ""))
 
         println("Result words:")
         results.foreach(println)
